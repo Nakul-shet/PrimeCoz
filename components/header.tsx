@@ -29,7 +29,7 @@ export default function Header() {
                 height={32}
                 className="mr-2"
               />
-              <span className="font-bold text-xl">ToRoar</span>
+              <span className="font-bold text-xl">PrimecoZ</span>
             </div>
           </Link>
         </div>
