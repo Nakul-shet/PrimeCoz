@@ -1,6 +1,9 @@
+"use client"
+import React from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
 import { ChevronRight, Play, BarChart3, Users, TrendingUp, CheckCircle } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,378 +14,208 @@ import AnalyticsSection from "@/components/analytics-section"
 import CreatorCard from "@/components/creator-card"
 import FeatureCard from "@/components/feature-card"
 import TestimonialCard from "@/components/testimonial-card"
+import AnimatedText from "@/components/animated-text"
+import AnimatedStatsRow from "@/components/animated-stats"
+import ContentLoader from "@/components/content-loader"
+import AnimatedImageGrid from "@/components/AnimatedImageGrid"
+import { motion } from "framer-motion"
 
 export default function Home() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(true);
+  
+  React.useEffect(() => {
+    // Simulate loading time for initial page load
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 20);
+    
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
+      <ContentLoader isLoading={isLoading} type="full">
       
-      {/* Hero Section - Updated to match Primecoz */}
-<section className="relative bg-white-200 py-20">  
-  <div className="container mx-auto px-4 md:px-6">
-    <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-      <div className="relative mx-auto lg:ml-0 w-full max-w-md order-1 lg:order-0">
-        {/* Creator image grid */}
-        <div className="grid grid-cols-3 gap-2">
-          {/* Row 1 */}
-          <div className="rounded-full overflow-hidden bg-blue-200">
-            <Image
-              src="male_influ.jpeg" // Replace with actual creator images
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
+      {/* Hero Section with Full-width Video Background */}
+      <section className="relative min-h-screen flex items-center py-20 overflow-hidden">
+        {/* Full-width background video */}
+        <div className="absolute top-0 left-0 w-full h-full z-0">
+          <div className="relative w-full h-full bg-gray-900">
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="absolute w-full h-full object-cover opacity-60"
+              poster="/images/video-poster.jpg"
+            >
+              <source src="/videos/influencer-bg.mp4" type="video/mp4" />
+            </video>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/70"></div>
           </div>
-          <div className="rounded-full overflow-hidden bg-yellow-300">
-            <Image
-              src={"female_influ.png"}
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="rounded-full overflow-hidden bg-red-400">
-            <Image
-              src={"female_influ.png"}
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          
-          {/* Row 2 */}
-          <div className="rounded-full overflow-hidden bg-yellow-300">
-            <Image
-              src={"male_influ.jpeg"}
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="rounded-full overflow-hidden bg-red-400">
-            <Image
-              src={"female_influ.png"}
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="rounded-full overflow-hidden bg-blue-200">
-            <Image
-              src={"female_influ.png"}
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          
-          {/* Row 3 */}
-          <div className="rounded-full overflow-hidden bg-blue-200">
-            <Image
-              src={"male_influ.jpeg"}
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="rounded-full overflow-hidden bg-yellow-300">
-            <Image
-              src={"female_influ.png"}
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="rounded-full overflow-hidden bg-red-400">
-            <Image
-              src={'male_influ.jpeg'}
-              width={120}
-              height={120}
-              alt="Creator"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-      
-      <div className="space-y-4 order-0 lg:order-1">
-        <div className="bg-yellow-200 p-4 rounded-lg">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl text-black">
-            Maximize the power of engaging content to reach a wider audience.
-          </h1>
         </div>
         
-        <div className="bg-yellow-200 p-4 rounded-lg">
-          <p className="text-lg md:text-xl text-black">
-            PrimecoZ brings small businesses and startups closer to their audiences with social media influencer driven content and reels.
-          </p>
-        </div>
-        
-        <div>
-          <Button size="lg" className="bg-red-500 hover:bg-red-600 text-white rounded-md font-semibold">
-            Get Started
-          </Button>
-        </div>
-        
-        <div className="bg-red-400 p-4 rounded-md">
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center text-white">
-              <div className="text-3xl font-bold">500k+</div>
-              <div className="text-sm">Daily Views</div>
-            </div>
-            <div className="text-center text-white">
-              <div className="text-3xl font-bold">2,500+</div>
-              <div className="text-sm">Creators</div>
-            </div>
-            <div className="text-center text-white">
-              <div className="text-3xl font-bold">85%+</div>
-              <div className="text-sm">Engagement Rate</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{/* Logos Section */}
-<section className="py-12 bg-white">
-  <div className="container mx-auto px-4 md:px-6">
-    <div className="text-center mb-8">
-      <h2 className="text-xl font-medium text-gray-600">Trusted by innovative brands</h2>
-    </div>
-    <div className="flex flex-wrap justify-center gap-8 items-center">
-      {/* Replace with actual brand logos from the screenshot */}
-      <Image src="/logo-renee.png" width={100} height={40} alt="RENEE" />
-      <Image src="/logo-gates.png" width={120} height={40} alt="Bill & Melinda Gates Foundation" />
-      <Image src="/logo-coinswitch.png" width={120} height={40} alt="CoinSwitch" />
-      <Image src="/logo-centuryply.png" width={120} height={40} alt="CenturyPly" />
-      <Image src="/logo-coindcx.png" width={100} height={40} alt="CoinDCX" />
-      <Image src="/logo-forever21.png" width={100} height={40} alt="Forever 21" />
-      <Image src="/logo-groww.png" width={100} height={40} alt="Groww" />
-      {/* Add more logos from the screenshot */}
-    </div>
-  </div>
-</section>
-
-{/* Features Section */}
-<section className="py-12">
-  <div className="container mx-auto px-4 md:px-6">
-    <div className="text-center mb-8">
-      <div className="bg-gray-300 p-3 inline-block mb-4">
-        <h2 className="text-2xl font-bold tracking-tight">
-          Let Reels Do the Work for Your Business
-        </h2>
-      </div>
-      <p className="mt-4 text-xl text-gray-800 max-w-3xl mx-auto">
-        "Short videos that speak to your audience."
-      </p>
-    </div>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div className="border border-gray-200 p-6 rounded-lg">
-        <div className="text-green-500 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-        </div>
-        <h3 className="font-bold text-lg mb-2">Product Spotlight with Reels</h3>
-        <p className="text-gray-600">
-          Showcase your products in action with authentic creator reels that highlight features and benefits in an engaging way.
-        </p>
-        <a href="#" className="text-green-500 inline-flex items-center mt-4">
-          Learn more
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </a>
-      </div>
-      
-      <div className="border border-gray-200 p-6 rounded-lg">
-        <div className="text-blue-500 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-        </div>
-        <h3 className="font-bold text-lg mb-2">24 Hours That Stick</h3>
-        <p className="text-gray-600">
-          Create time-limited story and reel content that creates urgency and FOMO. Our analytics show these get 3x more engagement.
-        </p>
-        <a href="#" className="text-blue-500 inline-flex items-center mt-4">
-          Learn more
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </a>
-      </div>
-      
-      <div className="border border-gray-200 p-6 rounded-lg">
-        <div className="text-orange-500 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="12" y1="20" x2="12" y2="10"></line>
-            <line x1="18" y1="20" x2="18" y2="4"></line>
-            <line x1="6" y1="20" x2="6" y2="16"></line>
-          </svg>
-        </div>
-        <h3 className="font-bold text-lg mb-2">Conversion-Driven Campaigns</h3>
-        <p className="text-gray-600">
-          Turn views into sales with our conversion-optimized reel formats that include clear CTAs and tracking links.
-        </p>
-        <a href="#" className="text-orange-500 inline-flex items-center mt-4">
-          Learn more
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </a>
-      </div>
-      
-      <div className="border border-gray-200 p-6 rounded-lg">
-        <div className="text-purple-500 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-          </svg>
-        </div>
-        <h3 className="font-bold text-lg mb-2">Real-Time Analytics</h3>
-        <p className="text-gray-600">
-          Keep an eye on your content's performance with simple dashboards showing views, engagement, and more.
-        </p>
-        <a href="#" className="text-purple-500 inline-flex items-center mt-4">
-          Learn more
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Hero Section */}
-      {/* <section className="relative bg-gradient-to-r from-blue-600 to-white-500 py-20 text-white">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container relative z-10 mx-auto px-4 md:px-6 pt-16">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-            <div className="space-y-4">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl text-black">
-              Amplify Your Brand With Creator Reels
-            </h1>
-              <p className="max-w-[600px] text-lg md:text-xl">
-                ReelReach connects small businesses and startups with audiences through authentic creator content and
-                reels.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white">
-                  Get Started <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-white/10 hover:bg-white/20 text-white border-/20"
-                >
-                  Watch Demo <Play className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-              <div className="grid grid-cols-3 gap-4 pt-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold">500k+</div>
-                  <div className="text-sm opacity-80">Daily Views</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold">2,500+</div>
-                  <div className="text-sm opacity-80">Creators</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold">85%+</div>
-                  <div className="text-sm opacity-80">Engagement Rate</div>
-                </div>
-              </div>
+            <div className="relative mx-auto lg:ml-0 w-full max-w-md order-1 lg:order-0">
+              {/* Creator image grid with animations */}
+              <AnimatedImageGrid />
             </div>
-            <div className="relative mx-auto lg:mr-0 w-full max-w-md">
-              <div className="relative rounded-full bg-white/10 p-1 backdrop-blur-sm">
-                <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold">
-                  New!
-                </div>
-                <Image
-                  src="https://zyda.com/hubfs/Screen%20Shot%202022-12-07%20at%201.00.35%20PM.png?height=600&width=600"
-                  width={600}
-                  height={600}
-                  alt="Platform preview"
-                  className="rounded-2xl shadow-xl"
+            
+            <div className="space-y-6 order-0 lg:order-1 text-white">
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="p-6 rounded-lg shadow-lg backdrop-blur-sm bg-gray-900/30 transform hover:scale-105 transition-transform duration-300 border border-gray-700/50"
+              >
+                <AnimatedText 
+                  text="MaximiZe the power of engaging content to reach a wider audience."
+                  className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl text-white"
+                  highlightColor="text-teal-400"
                 />
-              </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+                className="p-6 rounded-lg shadow-lg backdrop-blur-sm bg-gray-900/30 border border-gray-700/50"
+              >
+                <p className="text-lg md:text-xl text-white">
+                  Primeco<span className="text-red-500">Z</span> brings small businesses and startups closer to their audiences with social media influencer driven content and reels.
+                </p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button 
+                  size="lg" 
+                  className="bg-red-500 hover:bg-red-600 text-white rounded-md font-semibold shadow-lg" 
+                  onClick={() => router.push('/contact')}
+                >
+                  Get Started
+                </Button>
+              </motion.div>
+              
+              <AnimatedStatsRow 
+                stats={[
+                  { value: 500000, suffix: "+", label: "Daily Views", textColor: "text-teal-400" },
+                  { value: 2500, suffix: "+", label: "Creators", textColor: "text-pink-500" },
+                  { value: 85, suffix: "%+", label: "Engagement Rate", textColor: "text-indigo-400" }
+                ]}
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Logos Section */}
-      {/* <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-8">
             <h2 className="text-xl font-medium text-gray-600">Trusted by innovative brands</h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center opacity-70">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-              <div key={i} className="h-12 flex items-center">
-                <Image
-                  src={`/placeholder.svg?height=40&width=120&text=LOGO ${i}`}
-                  width={120}
-                  height={40}
-                  alt={`Partner logo ${i}`}
-                  className="max-h-full w-auto grayscale"
-                />
-              </div>
+          <div className="flex flex-wrap justify-center gap-8 items-center">
+            {/* Replace with actual brand logos from the screenshot */}
+            <Image src="/logo-renee.png" width={100} height={40} alt="RENEE" />
+            <Image src="/logo-gates.png" width={120} height={40} alt="Bill & Melinda Gates Foundation" />
+            <Image src="/logo-coinswitch.png" width={120} height={40} alt="CoinSwitch" />
+            <Image src="/logo-centuryply.png" width={120} height={40} alt="CenturyPly" />
+            <Image src="/logo-coindcx.png" width={100} height={40} alt="CoinDCX" />
+            <Image src="/logo-forever21.png" width={100} height={40} alt="Forever 21" />
+            <Image src="/logo-groww.png" width={100} height={40} alt="Groww" />
+            {/* Add more logos from the screenshot */}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section with Animations */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 md:px-6">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <motion.div 
+              className="bg-teal-100 p-4 rounded-lg inline-block mb-4 shadow-md"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <h2 className="text-3xl font-bold tracking-tight text-gray-800">
+                Let Reels Do the Work for Your Business
+              </h2>
+            </motion.div>
+            <p className="mt-4 text-xl text-gray-700 max-w-3xl mx-auto">
+              <span className="text-pink-500 font-semibold">"</span>
+              Short videos that speak to your audience and drive engagement
+              <span className="text-pink-500 font-semibold">"</span>
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>,
+                title: "Spotlight",
+                description: "Show your products being used through real videos by creators, so people can easily see the features and benefits.",
+                accentColor: "border-green-500"
+              },
+              {
+                icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>,
+                title: "Hotspot",
+                description: "Create time-limited story and reel content that creates urgency and FOMO. Our analytics show these get 3x more engagement.",
+                accentColor: "border-blue-500"
+              },
+              {
+                icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="20" x2="12" y2="10"></line>
+                      <line x1="18" y1="20" x2="18" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="16"></line>
+                    </svg>,
+                title: "Strategy",
+                description: "Turn views into sales with our conversion-optimized reel formats that include clear CTAs and tracking links.",
+                accentColor: "border-orange-500"
+              },
+              {
+                icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                      <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>,
+                title: "Analytics",
+                description: "Keep an eye on your content's performance with simple dashboards showing views, engagement, and more.",
+                accentColor: "border-purple-500"
+              }
+            ].map((feature, index) => (
+              <FeatureCard 
+                key={index}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                index={index}
+                accentColor={feature.accentColor}
+              />
             ))}
           </div>
         </div>
-      </section> */}
+      </section>
 
-      {/* Features Section */}
-      {/* <section className="py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Make Reels Work for Your Business
-            </h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-              Unlock the full potential of short-form video content that resonates with your target audience
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FeatureCard
-              icon={<Play className="h-10 w-10 text-teal-500" />}
-              title="Product Spotlight with Reels"
-              description="Showcase your products in action with authentic creator reels that highlight features and benefits in an engaging way."
-            />
-            <FeatureCard
-              icon={<Users className="h-10 w-10 text-blue-500" />}
-              title="24 Hours That Stick"
-              description="Create time-limited story and reel content that creates urgency and FOMO. Our analytics show these get 3x more engagement."
-            />
-            <FeatureCard
-              icon={<TrendingUp className="h-10 w-10 text-orange-500" />}
-              title="Conversion-Driven Campaigns"
-              description="Turn views into sales with our conversion-optimized reel formats that include clear CTAs and tracking links."
-            />
-            <FeatureCard
-              icon={<BarChart3 className="h-10 w-10 text-purple-500" />}
-              title="Real-Time Analytics"
-              description="Track the impact of your creator content with comprehensive analytics dashboards showing views, engagement, and conversion metrics."
-            />
-          </div>
-        </div>
-      </section> */}
 
       {/* Creator Showcase */}
       <section className="py-16 bg-gray-50">
@@ -448,7 +281,7 @@ export default function Home() {
               <Badge className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-100">Our Approach</Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">Data-Driven, Creator-Led Strategy</h2>
               <p className="text-lg text-gray-600 mb-6">
-                At ReelReach, we believe that successful content starts with a deep understanding of what your audience
+                At PrimecoZ, we believe that successful content starts with a deep understanding of what your audience
                 actually wants to see. Our platform combines data analytics with creator authenticity.
               </p>
               <ul className="space-y-4">
@@ -576,7 +409,7 @@ export default function Home() {
               position="Marketing Director"
               company="StyleTech"
               image="/placeholder.svg?height=80&width=80"
-              quote="We've seen a 300% increase in engagement since partnering with ReelReach. Their creator matching algorithm found us perfect partners that truly understand our brand voice."
+              quote="We've seen a 300% increase in engagement since partnering with PrimecoZ. Their creator matching algorithm found us perfect partners that truly understand our brand voice."
             />
             <TestimonialCard
               name="Marcus Wong"
@@ -590,7 +423,7 @@ export default function Home() {
               position="Social Media Manager"
               company="EcoEssentials"
               image="/placeholder.svg?height=80&width=80"
-              quote="As a sustainable brand, authenticity is everything to us. ReelReach connected us with creators who genuinely care about our mission, resulting in content that resonates deeply with our audience."
+              quote="As a sustainable brand, authenticity is everything to us. PrimecoZ connected us with creators who genuinely care about our mission, resulting in content that resonates deeply with our audience."
             />
           </div>
         </div>
@@ -608,7 +441,9 @@ export default function Home() {
                 to reach new audiences, our platform has you covered.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50">
+                <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50"
+                onClick={() => router.push('/contact')}
+                >
                   Get Started Now
                 </Button>
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
@@ -669,7 +504,7 @@ export default function Home() {
             <Accordion type="single" collapsible className="w-full">
               {[
                 {
-                  question: "How does ReelReach help businesses connect with creators?",
+                  question: "How does PrimecoZ help businesses connect with creators?",
                   answer:
                     "Our platform uses AI matching technology to pair your business with creators who align with your brand values, target audience, and marketing goals. We handle all aspects of the relationship from discovery to payment and performance tracking.",
                 },
@@ -684,7 +519,7 @@ export default function Home() {
                     "Our comprehensive analytics dashboard tracks key metrics including views, engagement rate, click-through rate, conversion rate, and ROI. We provide real-time data so you can see exactly how your campaigns are performing and make data-driven decisions.",
                 },
                 {
-                  question: "What makes ReelReach different from other creator marketing platforms?",
+                  question: "What makes PrimecoZ different from other creator marketing platforms?",
                   answer:
                     "Unlike other platforms, we focus exclusively on short-form video content that drives results. Our proprietary AI matching technology ensures authentic partnerships, and our analytics provide unparalleled insights into campaign performance.",
                 },
@@ -705,6 +540,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      </ContentLoader>
     </div>
   )
 }

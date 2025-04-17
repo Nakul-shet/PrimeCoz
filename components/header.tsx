@@ -22,14 +22,14 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center space-x-2">
             <div className="flex items-center">
+              <span className="font-bold text-xl">Primeco</span>
               <Image 
-                src="https://cdn-icons-png.flaticon.com/128/6422/6422197.png" 
-                alt="ToRoar Logo" 
-                width={32}
-                height={32}
+                src="/PrimecoZ_logo.png" 
+                alt="PrimecoZ Logo" 
+                width={50}
+                height={50}
                 className="mr-2"
               />
-              <span className="font-bold text-xl">PrimecoZ</span>
             </div>
           </Link>
         </div>
@@ -38,7 +38,7 @@ export default function Header() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Platform</NavigationMenuTrigger>
+                <NavigationMenuTrigger>Our Platform</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-2">
                     {[
@@ -71,7 +71,7 @@ export default function Header() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
+                <NavigationMenuTrigger>How We Server</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                     {[
@@ -110,7 +110,7 @@ export default function Header() {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <Link href="#" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Resources</NavigationMenuLink>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>About</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>

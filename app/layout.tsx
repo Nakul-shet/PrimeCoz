@@ -2,9 +2,14 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'PrimecoZ',
+  description: 'Created for PrimeCoz',
   generator: 'v0.dev',
+  icons: {
+    icon: [
+      { url: '/PrimecoZ_logo.png', sizes: '192x192', type: 'image/png' },
+    ],
+  },
 }
 
 export default function RootLayout({

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -8,24 +9,17 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           <div className="col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-6">
-              <div className="bg-teal-600 text-white p-1 rounded-md">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-6 w-6"
-                >
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                </svg>
-              </div>
-              <span className="font-bold text-xl text-white">ReelReach</span>
+              <b className="font-bold text-xl text-white">Primeco</b>
+              <Image 
+                src="/PrimecoZ_logo.png" 
+                alt="PrimecoZ Logo" 
+                width={50}
+                height={50}
+                className="mr-2"
+              />
             </Link>
             <p className="text-gray-400 mb-6 max-w-md">
-              ReelReach connects small businesses and startups with audiences through authentic creator content and
+              PrimecoZ connects small businesses and startups with audiences through authentic creator content and
               reels, driving growth and visibility.
             </p>
             <div className="flex space-x-4">
@@ -143,7 +137,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-500">© {new Date().getFullYear()} ReelReach. All rights reserved.</p>
+          <p className="text-sm text-gray-500">© {new Date().getFullYear()} PrimecoZ. All rights reserved.</p>
           <div className="mt-4 md:mt-0">
             <ul className="flex space-x-6 text-sm">
               <li>
