@@ -14,8 +14,10 @@ import { cn } from "@/lib/utils"
 import { Menu } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from 'next/image'
+import { useRouter } from "next/navigation"
 
 export default function Header() {
+  const router = useRouter();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -121,7 +123,9 @@ export default function Header() {
           <Link href="#" className="text-sm font-medium">
             Sign In
           </Link>
-          <Button className="bg-red-600 hover:bg-teal-700">Get Started</Button>
+          <Button className="bg-red-600 hover:bg-teal-700"
+          onClick={() => router.push('/campaign')}
+          >Get Started</Button>
         </div>
 
         <Sheet>

@@ -99,7 +99,7 @@ export default function Home() {
                 <Button 
                   size="lg" 
                   className="bg-red-500 hover:bg-red-600 text-white rounded-md font-semibold shadow-lg" 
-                  onClick={() => router.push('/contact')}
+                  onClick={() => router.push('/campaign')}
                 >
                   Get Started
                 </Button>
